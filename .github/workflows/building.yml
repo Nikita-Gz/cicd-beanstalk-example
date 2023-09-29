@@ -26,9 +26,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pylint
+        pip install pylint-exit
     - name: Run Tests
       run: |
         python ./exampleproject/manage.py test
     - name: Run PyLint
       run: |
-          pylint ./exampleproject/exampleapp/
+          pylint ./exampleproject/exampleapp/ || pylint-exit $?
+          if [ $? -ne 0 ]; then
+            echo "An error occurred while running pylint." >&2
+            exit 1
+          fi
