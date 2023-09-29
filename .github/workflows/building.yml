@@ -31,4 +31,4 @@ jobs:
         python ./exampleproject/manage.py test
     - name: Run PyLint
       run: |
-          pylint exampleproject
+          pylint ./exampleproject/exampleapp/
